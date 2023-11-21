@@ -18,13 +18,6 @@ public class CoursService {
         this.coursRepository = coursRepository;
     }
 
-    //C
-    /*
-    public CoursRecord insertOneRecord(CoursEntity coursEntity){
-        return this.coursRepository.save(coursEntity);
-    }
-    */
-
     //Read one record
     public CoursRecord findById(Integer id){
         Optional<CoursEntity> coursEntityReturned = this.coursRepository.findById(id);

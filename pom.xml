@@ -29,6 +29,7 @@
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
 		</dependency>
 
+
 		<!--DB DIALECT-->
 		<dependency>
 			<groupId>com.mysql</groupId>
@@ -50,12 +51,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--DB UNIT-->
-		<dependency>
-			<groupId>org.dbunit</groupId>
-			<artifactId>dbunit</artifactId>
-			<scope>test</scope>
-		</dependency>
 
 	</dependencies>
 

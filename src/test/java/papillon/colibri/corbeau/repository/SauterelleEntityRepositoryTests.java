@@ -13,6 +13,10 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test CRUD avec JDBC + Spring Data (Repository interfaces)
+ */
+
 @SpringBootTest
 @ActiveProfiles("test")
 @TestPropertySource("classpath:application-repository-test.properties")
