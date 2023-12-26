@@ -5,16 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import papillon.colibri.corbeau.basetest.entity.SauterelleEntity;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -38,23 +32,34 @@ class JdbcTemplateRequestsTests {
         assertEquals(1, rowsAffected);
 
         //Log des données de la table pour visualiser la donnée insérée
-        List<SauterelleEntity> sauterelleEntities = jdbcTemplate.query("SELECT * FROM SAUTERELLE", new RowMapper<>() {
-            @Override
-            public SauterelleEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
-                SauterelleEntity sauterelleEntity = new SauterelleEntity();
-                sauterelleEntity.setNaissance(rs.getDate("NAISSANCE"));
-                sauterelleEntity.setCouleur(rs.getString("COULEUR"));
-                sauterelleEntity.setId(rs.getInt("ID"));
-                return sauterelleEntity;
+        jdbcTemplate.query("SELECT * FROM SAUTERELLE", rs -> {
+            console("rs "+ rs.toString());
+                do{
+                    console("ID "+rs.getString(1));
+                    console("COULEUR "+rs.getString(2));
+                    console("NAISSANCE "+rs.getString(3));
+                }while (rs.next());
             }
-        });
-        this.console(sauterelleEntities.toString());
+        );
 
         //Suppression de la donnée
         int rowsCancelled = jdbcTemplate.update("DELETE FROM SAUTERELLE WHERE ID=?", -1);
         assertEquals(1, rowsCancelled);
 
         //Log des données de la table pour visualiser la donnée supprimée
+        jdbcTemplate.query("SELECT * FROM SAUTERELLE", rs -> {
+            console("rs "+ rs.toString()); //Ne passera pas, aucun résultat, rs vide
+                    do{
+                        console("ID "+rs.getString(1));
+                        console("COULEUR "+rs.getString(2));
+                        console("NAISSANCE "+rs.getString(3));
+                        console("");
+                    }while (rs.next());
+                }
+        );
+
+        /**
+        //Log des données de la table pour visualiser la donnée supprimée en entité (spring-boot-starter-data-jdbc)
         List<SauterelleEntity> sauterelleEntities2 = jdbcTemplate.query("SELECT * FROM SAUTERELLE", new RowMapper<>() {
             @Override
             public SauterelleEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -66,6 +71,7 @@ class JdbcTemplateRequestsTests {
             }
         });
         this.console(sauterelleEntities2.toString());
+         **/
     }
 
     //Test d'insertion complexe avec JDBC avec jointure
