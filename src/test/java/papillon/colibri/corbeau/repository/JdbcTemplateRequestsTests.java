@@ -8,12 +8,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test CRUD avec JDBC brut (JDBC Template) - bas niveau
+ * Test CRUD avec JDBC brut (JDBC Template) - bas niveau - Sans CrudRepository - Sans @Table
  */
 
 @Slf4j //journalisation simplifiée avec lombok (requiers la dépendance lombok dans le pom)
@@ -106,8 +109,52 @@ class JdbcTemplateRequestsTests {
         jdbcTemplate.update("DELETE from panier where ID=?", 3);
     }
 
+    //Test d'insertion simple avec JDBC sans jointure avec valeurs passées en paramètre
+    @Test
+    void testInsertWithJdbcTemplateRequestWithParameters() {
+        Scanner scanner = new Scanner(System.in); // Création d'un objet Scanner
+
+        //System.out.print("Entrez la position de la sauterelle à insérer en base de donnée: ");
+        Integer bddNumber = 3; //scanner.nextInt(); // Lecture d'une ligne de texte
+
+        //System.out.print("Entrez la couleur de la sauterelle à insérer en base de donnée: ");
+        String color = "noire"; //scanner.nextLine(); // Lecture d'une ligne de texte
+
+        //System.out.print("Entrez la date de naissance de la sauterelle à insérer en base de donnée (JJ/MM/AAAA): ");
+        String born = "03/06/1999"; //scanner.nextLine(); // Lecture d'un entier
+
+        int rowsAffected = jdbcTemplate.update("INSERT INTO SAUTERELLE (ID, COULEUR, NAISSANCE) VALUES (?, ?, ?)", bddNumber, color, this.getDateFromString(born));
+        assertEquals(1, rowsAffected); //Controle l'insertion effective, pas les données
+
+        //Log des données de la table pour visualiser la donnée insérée
+        jdbcTemplate.query("SELECT * FROM SAUTERELLE", rs -> {
+                    console("rs "+ rs.toString());
+                    do{
+                        assertEquals(bddNumber.toString(), rs.getString(rs.findColumn("ID")));
+                        assertEquals(color, rs.getString(rs.findColumn("COULEUR")));
+                        assertEquals("1999-06-03", rs.getString(rs.findColumn("NAISSANCE")));
+                    }while (rs.next());
+                }
+        );
+
+        //Suppression de la donnée
+        int rowsCancelled = jdbcTemplate.update("DELETE FROM SAUTERELLE WHERE ID=?", bddNumber);
+        assertEquals(1, rowsCancelled); //Controle la suppression effective
+    }
+
     private void console(String stringToColor){
         log.info("\u001B[34m" + "\u001B[1m" + stringToColor + "\u001B[0m");
+    }
+
+    private Date getDateFromString(String dateString){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date birthDate = null;
+        try {
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            System.out.println("Format de date à respecter (dd/MM/yyyy) incorrect:" + dateString);
+            throw new RuntimeException(e);
+        }
     }
 
 }
