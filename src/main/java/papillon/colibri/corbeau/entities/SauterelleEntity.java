@@ -17,12 +17,11 @@ public class SauterelleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
-    private Byte id;
+    private Integer id;
 
     @Column(name = "COULEUR", nullable = false, length = 50)
     private String couleur;
 
     @Column(name = "NAISSANCE")
     private LocalDate naissance;
-
 }

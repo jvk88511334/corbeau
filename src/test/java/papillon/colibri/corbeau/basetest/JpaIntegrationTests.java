@@ -25,6 +25,8 @@ public class JpaIntegrationTests {
 
     @Test
     void insertClassic(){
+        SauterelleEntity.builder().build();
+        //sauterelleRepository.save(new SauterelleEntity("noir", LocalDate.now()));
         sauterelleRepository.save(SauterelleEntity.builder().couleur("noir").naissance(LocalDate.now()).build());
         sauterelleRepository.save(SauterelleEntity.builder().couleur("bleu").naissance(LocalDate.now()).build());
         sauterelleRepository.findAll().forEach(el -> log.warn(String.valueOf(el)));
