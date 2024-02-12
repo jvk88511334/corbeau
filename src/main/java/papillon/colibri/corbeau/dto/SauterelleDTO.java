@@ -12,7 +12,7 @@ import java.io.Serializable;
 //Création de la DTO, qui pour l'exemple ne montrera pas le champ naissance, crée à partir de l'IDE Intellij, rajout de @Setter
 @Value
 @Setter
-public class SauterelleDto implements Serializable {
+public class SauterelleDTO implements Serializable {
     Byte id;
     String couleur;
 }
