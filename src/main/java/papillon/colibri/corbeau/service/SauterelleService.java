@@ -1,6 +1,5 @@
 package papillon.colibri.corbeau.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import papillon.colibri.corbeau.dto.SauterelleDTO;
 import papillon.colibri.corbeau.entities.SauterelleEntity;
