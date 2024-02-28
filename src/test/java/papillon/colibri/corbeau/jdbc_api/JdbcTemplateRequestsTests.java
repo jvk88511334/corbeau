@@ -24,8 +24,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ActiveProfiles("test") //seul les beans associés au profil “test” seront instanciés dans le contexte d’application pour les tests
 @TestPropertySource("classpath:application-repository-test.properties") //Branchement sur une base de donnée de test
 class JdbcTemplateRequestsTests {
+    private final JdbcTemplate jdbcTemplate;
+
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    JdbcTemplateRequestsTests(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     //Test d'insertion simple avec JDBC sans jointure
     @Test
