@@ -60,21 +60,6 @@ class JdbcTemplateRequestsTests {
                     }while (rs.next());
                 }
         );
-
-        /**
-        //Log des données de la table pour visualiser la donnée supprimée en entité (spring-boot-starter-data-jdbc)
-        List<SauterelleEntity> sauterelleEntities2 = jdbcTemplate.query("SELECT * FROM SAUTERELLE", new RowMapper<>() {
-            @Override
-            public SauterelleEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
-                SauterelleEntity sauterelleEntity = new SauterelleEntity();
-                sauterelleEntity.setNaissance(rs.getDate("NAISSANCE"));
-                sauterelleEntity.setCouleur(rs.getString("COULEUR"));
-                sauterelleEntity.setId(rs.getInt("ID"));
-                return sauterelleEntity;
-            }
-        });
-        this.console(sauterelleEntities2.toString());
-         **/
     }
 
     //Test d'insertion complexe avec JDBC avec jointure

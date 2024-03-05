@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @SpringBootTest
 @ActiveProfiles("test")
 @TestPropertySource("classpath:application-repository-test.properties")
-@ComponentScan("papillon.colibri.corbeau")
+@ComponentScan("papillon.colibri.corbeau.basetest")
 public class JdbcSpringDataClassicTests {
     private final SauterelleRepository sauterelleRepository;
 
