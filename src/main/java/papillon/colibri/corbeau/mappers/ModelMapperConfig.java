@@ -15,6 +15,7 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true);
+
         //Mapping DTO -> Entity
         modelMapper.createTypeMap(SauterelleDTO.class, SauterelleEntity.class)
                 .setPostConverter(context -> {
@@ -32,6 +33,20 @@ public class ModelMapperConfig {
                     }
                     return destination;
                 });
+
+        //Mapping Entity -> DTO
+        modelMapper.createTypeMap(SauterelleEntity.class, SauterelleDTO.class)
+                .setPostConverter(context -> {
+                    SauterelleEntity source = context.getSource();
+                    SauterelleDTO destination = context.getDestination();
+
+                    //Entity valeur null -> DTO valeur par defaut
+                    if (source.getCouleur() == null) {
+                        destination.setCouleur("noir");
+                    }
+                    return destination;
+                });
+
         modelMapper.validate();
         return modelMapper;
     }

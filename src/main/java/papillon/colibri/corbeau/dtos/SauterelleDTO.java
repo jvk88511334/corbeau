@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
+@ToString
 public class SauterelleDTO implements Serializable {
     Integer id;
     String couleur;

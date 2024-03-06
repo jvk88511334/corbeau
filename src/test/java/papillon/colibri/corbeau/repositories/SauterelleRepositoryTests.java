@@ -1,13 +1,13 @@
-package papillon.colibri.corbeau.basetest;
+package papillon.colibri.corbeau.repositories;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import papillon.colibri.corbeau.entities.SauterelleEntity;
-import papillon.colibri.corbeau.repositories.SauterelleRepository;
 
 import java.time.LocalDate;
 
@@ -15,14 +15,15 @@ import java.time.LocalDate;
 @SpringBootTest
 @ActiveProfiles("test")
 @TestPropertySource("classpath:application-test.properties")
-public class JpaIntegrationTests {
+public class SauterelleRepositoryTests {
     private final SauterelleRepository sauterelleRepository;
 
     @Autowired
-    public JpaIntegrationTests(SauterelleRepository sauterelleRepository) {
+    public SauterelleRepositoryTests(SauterelleRepository sauterelleRepository) {
         this.sauterelleRepository = sauterelleRepository;
     }
 
+    @Tag("integration")
     @Test
     void insertClassic(){
         sauterelleRepository.save(SauterelleEntity.builder().couleur("noir").naissance(LocalDate.now()).build());
