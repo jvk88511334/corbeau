@@ -23,4 +23,7 @@ public class SauterelleDTO implements Serializable {
     String couleur;
 }
 
-//Quand une sauterelle sera crée par le controleur qui envoie une SauterelleDTO, la date de naissance sera générée
+//Quand une sauterelle sera crée par le controleur qui envoie une SauterelleDTO, la date de naissance sera générée, ici elle est cachée volontairement
+//il suffit de placer     LocalDate naissance; dans la dto pour en autoriser l'envoi par l'interface
+//et de mettre dans le JSON un champ "naissance" : "2022-03-15", pour envoyer une date au bon format
+//sinon même si le client envoie une date, elle sera filtré par les règles présentes dans ModelMapperConfig

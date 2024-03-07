@@ -1,0 +1,10 @@
+###
+POST http://localhost:8080/sauterelles/create-sauterelle
+Content-Type: application/json
+
+{
+  "naissance" : "2022-03-15",
+  "couleur": "mauve"
+}
+
+###

@@ -30,9 +30,4 @@ public class SauterelleEntity {
 
     @Column(name = "NAISSANCE")
     private LocalDate naissance;
-
-    public SauterelleEntity(String couleur) {
-        this.couleur = couleur;
-        this.naissance = LocalDate.now();
-    }
 }

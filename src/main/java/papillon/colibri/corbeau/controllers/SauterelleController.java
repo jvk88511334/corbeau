@@ -25,7 +25,7 @@ public class SauterelleController {
         return new ResponseEntity<>(sauterelleDTO, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create-sauterelle")
     public ResponseEntity<Void> createSauterelle(@RequestBody SauterelleDTO sauterelleDTO) {
         sauterelleService.createSauterelle(sauterelleDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -49,6 +49,4 @@ public class SauterelleController {
         sauterelleService.deleteAllSauterelles();
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    //TODO clean for tests
 }
