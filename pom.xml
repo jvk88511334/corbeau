@@ -30,6 +30,12 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
             <version>3.2.3</version>
         </dependency>
+        <!--docker-compose-support-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-docker-compose</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <!--BUILD-->
