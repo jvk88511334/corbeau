@@ -27,9 +27,9 @@ public class SauterelleDao {
         */
 
         // Connectez-vous à la base de données que vous avez crée
-        String url = "jdbc:mysql://localhost:3306/jpa";
-        String username = "root";
-        String password = "Zp3pbrya";
+        String url = "mydb";
+        String username = "myuser";
+        String password = "mypassword";
         Connection connection = DriverManager.getConnection(url, username, password);
 
         // Exécutez la requête SQL pour récupérer les données de la table
