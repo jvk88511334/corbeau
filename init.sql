@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.%' IDENTIFIED BY 'Zp3pbrya';
