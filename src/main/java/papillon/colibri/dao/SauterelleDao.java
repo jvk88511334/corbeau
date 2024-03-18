@@ -27,9 +27,11 @@ public class SauterelleDao {
         */
 
         // Connectez-vous à la base de données que vous avez crée
-        String url = "mydb";
-        String username = "myuser";
-        String password = "mypassword";
+        // Dans le container docker il faudra utiliser jdbc:mysql://host.docker.internal:3306/[nom de votre base]
+        // Dans le terminal d'une machine locale il faudra utiliser jdbc:mysql://localhost:3306/[nom de votre base]
+        String url = "jdbc:mysql://host.docker.internal:3306/jpa";
+        String username = "root";
+        String password = "Zp3pbrya";
         Connection connection = DriverManager.getConnection(url, username, password);
 
         // Exécutez la requête SQL pour récupérer les données de la table
