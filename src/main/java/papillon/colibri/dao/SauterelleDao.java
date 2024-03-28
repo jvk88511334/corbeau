@@ -17,13 +17,13 @@ public class SauterelleDao {
             return null;
         }
 
-        /* Pour une table crée comme ceci
+        /* Pour une table crée comme ceci (necessite d'avoir installé une BDD nommée jpa dans cet exemple)
         CREATE TABLE `sauterelle` (
         `id` int NOT NULL AUTO_INCREMENT,
         `naissance` date DEFAULT NULL,
         `couleur` varchar(50) NOT NULL,
         PRIMARY KEY (`id`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+        )
         */
 
         // Connectez-vous à la base de données que vous avez crée

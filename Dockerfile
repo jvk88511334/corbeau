@@ -1,13 +1,18 @@
-FROM amazoncorretto:17
+FROM maven:3.9-amazoncorretto-21 as build-image
+WORKDIR /build/
+
 # FROM = a partir d'une image officielle va construire une image dérivée
 # ATTENTION en cas de modification du code penser a systématiquement rebuilder l'application
-# Copier le fichier JAR (qui à été préalablement construit dans un repertoire target crée par la commande mvn package) dans l'image
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-# Exposer le port sur lequel l'application va tourner
+COPY . /build/
+
+# Exécuter la commande Maven package pour construire le JAR
+RUN mvn clean package
+
+FROM openjdk:17-alpine as api-image
+WORKDIR /app/
+# Copier le JAR construit dans l'image
+COPY --from=build-image /build/target/*.jar /app/corbeau.jar
+
+# Exposer le port et lancer l'application
 EXPOSE 8080
-# Lancer l'application Spring Boot
-ENTRYPOINT ["java","-jar","/app.jar"]
-# Le lien avec le docker-compose est fait dans la partie
-#app:
-# build: .
+ENTRYPOINT ["java","-jar","/app/corbeau.jar"]
