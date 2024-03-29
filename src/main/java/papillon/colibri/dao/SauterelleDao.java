@@ -9,7 +9,7 @@ public class SauterelleDao {
         List<Sauterelle> users = new ArrayList<>();
 
         // Chargez le pilote JDBC approprié
-        String driver = "com.mysql.cj.jdbc.Driver";
+        String driver = "org.postgresql.Driver";
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -35,9 +35,9 @@ public class SauterelleDao {
          Dans le terminal d'une machine locale il faudra utiliser jdbc:mysql://localhost:3306/[nom de votre base]
          Dans la cadre d'une image docker locale il faudra utiliser jdbc:mysql://host.docker.internal:3306/[nom de votre base]
          */
-        String url = "jdbc:mysql://host.docker.internal:3306/jpa";
+        String url = "jdbc:postgresql://localhost:5432/creme";
         String username = "root";
-        String password = "Zp3pbrya";
+        String password = "Bacille";
         Connection connection = DriverManager.getConnection(url, username, password);
 
         // Exécutez la requête SQL pour récupérer les données de la table
@@ -50,7 +50,8 @@ public class SauterelleDao {
             int id = resultSet.getInt("ID");
             Date naissance = resultSet.getDate("NAISSANCE");
             String couleur = resultSet.getString("COULEUR");
-            Sauterelle user = new Sauterelle(id, naissance, couleur);
+            String nom = resultSet.getString("NOM");
+            Sauterelle user = new Sauterelle(id, naissance, couleur, nom);
             users.add(user);
         }
 

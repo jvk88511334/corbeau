@@ -1,34 +1,25 @@
-version: '3.8'
+version: '3'
 services:
   app:
-    image: jeromev34/corbeaudocker:latest
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/jpa?useSSL=false&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: Zp3pbrya
+    image: myspringbootapp:latest
+    build: .
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
-      - "8081:8080"
+      - "8085:8080"
     depends_on:
-      - db_container
-  db_container:
-    image: mysql:8.0
+      - db
+  db:
+    image: postgres:latest
     environment:
-      MYSQL_DATABASE: 'jpa'
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Zp3pbrya
-      MYSQL_ROOT_PASSWORD: Zp3pbrya
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: Bacille
     volumes:
-      - db-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "3307:3306"
+      - "5432:5432"
   adminer:
     image: adminer
     restart: always
     ports:
       - "8082:8080"
-
-volumes:
-  db-data:
