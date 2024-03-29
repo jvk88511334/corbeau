@@ -1,2 +1,0 @@
-1. Construction d'un dockerfile, dont le rôle, à partir d'une image disponible sur dockerhub, va construire une image maison en copiant l'ensemble du repertoire du projet dans l'image, puis va lancer la commande maven de compilation du projet java spring boot dans ce dossier, une fois le jar obtenu dans cette image de build, on l'utilise dans une seconde image d'api, puis on expose le port et on lance l'application.
-2. 

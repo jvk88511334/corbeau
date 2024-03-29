@@ -13,7 +13,6 @@ public class SauterelleDao {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
-            System.out.println("ici");
             e.printStackTrace();
             return null;
         }
@@ -29,12 +28,7 @@ public class SauterelleDao {
 
         // Connectez-vous à la base de données que vous avez crée
         // Dans le container docker il faudra utiliser jdbc:mysql://host.docker.internal:3306/[nom de votre base]
-
-        /*
-         IMPORTANT ! Pour se connecter
-         Dans le terminal d'une machine locale il faudra utiliser jdbc:mysql://localhost:3306/[nom de votre base]
-         Dans la cadre d'une image docker locale il faudra utiliser jdbc:mysql://host.docker.internal:3306/[nom de votre base]
-         */
+        // Dans le terminal d'une machine locale il faudra utiliser jdbc:mysql://localhost:3306/[nom de votre base]
         String url = "jdbc:mysql://host.docker.internal:3306/jpa";
         String username = "root";
         String password = "Zp3pbrya";
