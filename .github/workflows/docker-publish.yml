@@ -3,7 +3,7 @@ name: Publish Docker image
 on:
   push:
     branches:
-      - docker-compose-support
+      - devops-dockerfile-githubaction-dockerhub-dockercompose
 
 jobs:
   build-and-push:
