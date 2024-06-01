@@ -9,7 +9,7 @@ public class SauterelleDao {
         List<Sauterelle> users = new ArrayList<>();
 
         // Chargez le pilote JDBC approprié
-        String driver = "com.mysql.cj.jdbc.Driver";
+        String driver = "org.postgresql.Driver";
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -18,20 +18,31 @@ public class SauterelleDao {
         }
 
         /* Pour une table crée comme ceci (necessite d'avoir installé une BDD nommée jpa dans cet exemple)
+
+        en dialecte mysql
         CREATE TABLE `sauterelle` (
         `id` int NOT NULL AUTO_INCREMENT,
         `naissance` date DEFAULT NULL,
         `couleur` varchar(50) NOT NULL,
         PRIMARY KEY (`id`)
         )
+
+        en dialecte postgresql
+        CREATE TABLE SAUTERELLE(
+           ID SERIAL,
+           COULEUR VARCHAR(50)  NOT NULL,
+           NAISSANCE DATE,
+           PRIMARY KEY(ID)
+        );
+
         */
 
         // Connectez-vous à la base de données que vous avez crée
         // Dans le container docker il faudra utiliser jdbc:mysql://host.docker.internal:3306/[nom de votre base]
         // Dans le terminal d'une machine locale il faudra utiliser jdbc:mysql://localhost:3306/[nom de votre base]
-        String url = "jdbc:mysql://host.docker.internal:3306/jpa";
-        String username = "root";
-        String password = "Zp3pbrya";
+        String url = "jdbc:postgresql://bxcks3sg2hgyl3qhoyuv-postgresql.services.clever-cloud.com:50013/bxcks3sg2hgyl3qhoyuv";
+        String username = "uzriq7xzzcibedlmfxag";
+        String password = "COUZegfJvcWDR9a4J5IJ22Ib09JDNX";
         Connection connection = DriverManager.getConnection(url, username, password);
 
         // Exécutez la requête SQL pour récupérer les données de la table
